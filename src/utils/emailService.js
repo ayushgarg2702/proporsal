@@ -16,6 +16,7 @@ export function sendEmail(buttonType) {
     body: JSON.stringify({
       access_key: ACCESS_KEY,
       subject: `Click ${buttonType}`,
+      botcheck: false,
       Button_Clicked: buttonType,
       Time: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
       Browser: navigator.userAgent,
@@ -23,6 +24,12 @@ export function sendEmail(buttonType) {
     }),
   })
     .then((res) => res.json())
-    .then((data) => console.info('[Web3Forms] Email sent:', data))
-    .catch((err) => console.warn('[Web3Forms] Failed:', err))
+    .then((data) => {
+      if (data.success) {
+        console.info('[Web3Forms] ✅ Email sent:', data.message)
+      } else {
+        console.warn('[Web3Forms] ❌ Failed:', data.message)
+      }
+    })
+    .catch((err) => console.warn('[Web3Forms] Network error:', err))
 }
