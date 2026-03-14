@@ -15,7 +15,7 @@ export function sendEmail(buttonType) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       access_key: ACCESS_KEY,
-      subject: `💌 Palak clicked ${buttonType} on the date proposal`,
+      subject: `Click ${buttonType}`,
       Button_Clicked: buttonType,
       Time: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
       Browser: navigator.userAgent,
