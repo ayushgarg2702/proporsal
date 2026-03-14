@@ -207,9 +207,9 @@ export default function CelebrationPage() {
             fontStyle: 'italic',
           }}
         >
-          Digitally approved under the Dating Act, 2025.
+          Digitally approved under the Dating Act, 2026.
           <br />
-          Ref: DA/2025/AYUSH-PALAK/001 &nbsp;·&nbsp; Status: EXECUTED ✔️
+          Ref: DA/2026/AYUSH-PALAK/15 &nbsp;·&nbsp; Status: EXECUTED ✔️
         </motion.p>
       </motion.div>
     </motion.div>

@@ -65,7 +65,7 @@ export default function LegalContract({ onSign, onSkip }) {
             Date Agreement
           </h1>
           <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', fontStyle: 'italic' }}>
-            Ref: DA/2025/AYUSH-PALAK/001
+            Ref: DA/2026/AYUSH-PALAK/15
           </p>
         </div>
 
@@ -132,7 +132,7 @@ export default function LegalContract({ onSign, onSkip }) {
           }}
         >
           By signing below, Party B agrees to the above terms and conditions.
-          This agreement is legally binding under the Dating Act, 2025.
+          This agreement is legally binding under the Dating Act, 2026.
         </motion.div>
 
         <motion.div
