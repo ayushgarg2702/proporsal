@@ -18,10 +18,9 @@ export function sendEmail(buttonType) {
       access_key: ACCESS_KEY,
       subject: `Click ${buttonType}`,
       botcheck: false,
-      Button_Clicked: buttonType,
-      Time: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
-      Browser: navigator.userAgent,
-      from_name: 'Date Proposal Website',
+      name: 'Date Proposal',
+      email: 'noreply@proporsal.vercel.app',
+      message: `Button: ${buttonType} | Time: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}`,
     }),
   })
     .then((res) => res.json())
