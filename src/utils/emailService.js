@@ -1,35 +1,25 @@
-// v2 — re-baked with corrected access key
-const ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_KEY
+const FORMSPREE_URL = 'https://formspree.io/f/mreyagod'
 
 /**
- * Sends an email notification via Web3Forms.
+ * Sends an email notification via Formspree.
  * @param {'YES' | 'NO'} buttonType
  */
 export function sendEmail(buttonType) {
-  if (!ACCESS_KEY) {
-    console.info('[Web3Forms] Not configured — skipping email send.')
-    return
-  }
-
-  fetch('https://api.web3forms.com/submit', {
+  fetch(FORMSPREE_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      access_key: ACCESS_KEY,
       subject: `Click ${buttonType}`,
-      botcheck: false,
-      name: 'Date Proposal',
-      email: 'noreply@proporsal.vercel.app',
       message: `Button: ${buttonType} | Time: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}`,
     }),
   })
     .then((res) => res.json())
     .then((data) => {
-      if (data.success) {
-        console.info('[Web3Forms] ✅ Email sent:', data.message)
+      if (data.ok) {
+        console.info('[Formspree] ✅ Email sent!')
       } else {
-        console.warn('[Web3Forms] ❌ Failed:', data.message)
+        console.warn('[Formspree] ❌ Failed:', data)
       }
     })
-    .catch((err) => console.warn('[Web3Forms] Network error:', err))
+    .catch((err) => console.warn('[Formspree] Network error:', err))
 }
