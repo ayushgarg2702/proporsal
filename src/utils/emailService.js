@@ -1,31 +1,28 @@
-import emailjs from '@emailjs/browser'
-
-const SERVICE_ID  = import.meta.env.VITE_EMAILJS_SERVICE_ID
-const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
-const PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+const ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_KEY
 
 /**
- * Sends an email notification via EmailJS.
+ * Sends an email notification via Web3Forms.
  * @param {'YES' | 'NO'} buttonType
  */
 export function sendEmail(buttonType) {
-  // Silently skip if EmailJS is not configured
-  if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
-    console.info('[EmailJS] Not configured — skipping email send.')
+  if (!ACCESS_KEY) {
+    console.info('[Web3Forms] Not configured — skipping email send.')
     return
   }
 
-  emailjs
-    .send(
-      SERVICE_ID,
-      TEMPLATE_ID,
-      {
-        button: buttonType,
-        time: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
-        browser: navigator.userAgent,
-      },
-      PUBLIC_KEY
-    )
-    .then(() => console.info(`[EmailJS] "${buttonType}" click email sent.`))
-    .catch((err) => console.warn('[EmailJS] Failed to send email:', err))
+  fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      access_key: ACCESS_KEY,
+      subject: `💌 Palak clicked ${buttonType} on the date proposal`,
+      Button_Clicked: buttonType,
+      Time: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+      Browser: navigator.userAgent,
+      from_name: 'Date Proposal Website',
+    }),
+  })
+    .then((res) => res.json())
+    .then((data) => console.info('[Web3Forms] Email sent:', data))
+    .catch((err) => console.warn('[Web3Forms] Failed:', err))
 }
